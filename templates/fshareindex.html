@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Share - Anonymous File Share</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .upload-button {
+            background-color: #3f51b5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .optional-description, .optional-alias {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .file-info {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .made-in-india {
+            margin-top: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon {
+            margin-left: 5px;
+            display: inline-block;
+            width: 16px;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Tiny Share</h1>
+        <p>Share files anonymously with others.</p>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file" class="upload-button">
+                Select File
+                <input type="file" name="file" id="file" style="display: none;" onchange="displayFileName()" required>
+            </label>
+            <p id="file-info" class="file-info"></p>
+            <input type="text" name="description" class="optional-description" placeholder="Description [Optional]">
+            <input type="text" name="alias" class="optional-alias" placeholder="Alias [Optional]">
+            <button type="submit" class="upload-button">Upload</button>
+        </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <p class="error-message">{{ messages[0] }}</p>
+      {% endif %}
+    {% endwith %}
+        <p class="made-in-india">Made with ❤️ in India 🇮🇳</p>
+    </div>
+
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('file');
+            const fileInfo = document.getElementById('file-info');
+            if (fileInput.files.length > 0) {
+                fileInfo.textContent = 'Selected file: ' + fileInput.files[0].name;
+                fileInfo.style.display = 'block';
+            } else {
+                fileInfo.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

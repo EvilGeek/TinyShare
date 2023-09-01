@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Share - File Information - {{ file_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        p {
+            margin: 10px 0;
+            word-wrap: break-word;
+        }
+        
+        
+        .download-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-button:hover {
+            background-color: #2980b9;
+        }
+        .made-in-india {
+            margin-top: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Information</h1>
+        <p><strong>Alias:</strong> {{ alias }}</p>
+        <p><strong>File Name:</strong> {{ file_name }}</p>
+        <p><strong>File Size:</strong> {{ file_size }} bytes</p>
+        <p><strong>MIME Type:</strong> {{ mime_type }}</p>
+        <p><strong>Description:</strong> {% if description %}{{ description }}{% else %}No description available{% endif %}</p>
+        <p><strong>Upload Date:</strong> {{ upload_date }}</p>
+        <a href="{{ url_for('dl_file', alias=alias) }}" class="download-button">Download</a>
+    </div>
+
+</body>
+</html>
